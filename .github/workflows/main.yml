@@ -5,7 +5,7 @@ on: [push]
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -21,8 +21,8 @@ jobs:
           - 2021.3.23f1
         # projectPath:
         #   - test-project
-        # dockerImage:
-        #   - unityci/editor:ubuntu-2021.3.23f1-windows-mono-1.1.2
+        dockerImage:
+          - unityci/editor:windows-2021.3.23f1-windows-il2cpp-1.1.2
     steps:
       - name: Checkout
         uses: actions/checkout@v3.5.2
@@ -56,10 +56,10 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          # customImage: ${{ matrix.dockerImage }}
+          customImage: ${{ matrix.dockerImage }}
           targetPlatform: ${{ matrix.targetPlatform }}
           # projectPath: ${{ matrix.projectPath }}
-          unityVersion: ${{ matrix.unityVersion }}
+          # unityVersion: ${{ matrix.unityVersion }}
 
       - name: Upload Build
         uses: actions/upload-artifact@v3.1.2
