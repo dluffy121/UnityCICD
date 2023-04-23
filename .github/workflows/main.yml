@@ -22,7 +22,7 @@ jobs:
         # projectPath:
         #   - test-project
         dockerImage:
-          - unityci/editor:windows-2021.3.23f1-windows-il2cpp-1.1.2
+          - unityci/editor:ubuntu-2021.3.23f1-windows-mono-1.1.2
     steps:
       - uses: actions/checkout@v3.5.2
         with:
