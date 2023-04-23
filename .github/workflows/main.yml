@@ -45,9 +45,9 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           customImage: ${{ matrix.dockerImage }}
+          targetPlatform: ${{ matrix.targetPlatform }}
           # projectPath: ${{ matrix.projectPath }}
           # unityVersion: ${{ matrix.unityVersion }}
-          targetPlatform: ${{ matrix.targetPlatform }}
 
       - uses: actions/upload-artifact@v3.1.2
         with:
