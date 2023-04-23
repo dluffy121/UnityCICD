@@ -8,8 +8,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        dockerImage:
-          - unityci/editor:ubuntu-2021.3.23f1-windows-mono-1.1.2
+        unityVersion:
+          - 2021.3.23f1
     steps:
       # Request manual activation file
       - name: Request manual activation file
@@ -19,6 +19,6 @@ jobs:
       - name: Expose as artifact
         uses: actions/upload-artifact@v2
         with:
-          customImage: ${{ matrix.dockerImage }}
+          unityVersion: ${{ matrix.unityVersion }}
           name: ${{ steps.getManualLicenseFile.outputs.filePath }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
