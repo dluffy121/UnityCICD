@@ -3,58 +3,6 @@ name: Build project
 on: [push]
 
 jobs:
-  # buildWindows:
-  #   needs: testRunner
-  #   name: Build for Windows 🖥️
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       targetPlatform:
-  #         # - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
-  #         - StandaloneWindows # Build a Windows standalone.
-  #         - StandaloneWindows64 # Build a Windows 64-bit standalone.
-  #       unityVersion:
-  #         - 2021.3.23f1
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Create LFS file list
-  #       run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
-
-  #     - name: Restore LFS cache
-  #       uses: actions/cache@v2
-  #       id: lfs-cache
-  #       with:
-  #         path: .git/lfs
-  #         key: ${{ runner.os }}-lfs-${{ hashFiles('.lfs-assets-id') }}
-
-  #     - name: Git LFS Pull
-  #       run: |
-  #         git lfs pull
-  #         git add .
-  #         git reset --hard
-
-  #     - name: Restore Library cache
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: Library
-  #         key: Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{hashFiles(matrix.projectPath) }}
-  #         restore-keys:
-  #           Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
-  #           Library-${{ matrix.projectPath }}-
-  #           Library-
-
-  #     - uses: game-ci/unity-builder@v2
-  #       with:
-  #         targetPlatform: ${{ matrix.targetPlatform }}
-
-  #     - uses: actions/upload-artifact@v2
-  #       with:
-  #         name: Build-${{ matrix.targetPlatform }}
-  #         path: build/${{ matrix.targetPlatform }}
-
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
@@ -69,12 +17,12 @@ jobs:
           # - iOS # Build an iOS player.
           # - Android # Build an Android .apk standalone app.
           # - WebGL # WebGL.
-        unityVersion:
-          - 2021.3.23f1
-        projectPath:
-          - test-project
+        # unityVersion:
+        #   - 2021.3.23f1
+        # projectPath:
+        #   - test-project
         dockerImage:
-          - editor-windows-2021.3.23f1-windows-il2cpp-1.1.2
+          - editor-ubuntu-2021.3.23f1-base-1.1.2
     steps:
       - uses: actions/checkout@v3.5.2
         with:
@@ -97,7 +45,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           customImage: ${{ matrix.dockerImage }}
-          projectPath: ${{ matrix.projectPath }}
+          # projectPath: ${{ matrix.projectPath }}
           # unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
 
