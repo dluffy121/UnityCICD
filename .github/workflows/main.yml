@@ -22,7 +22,7 @@ jobs:
         # projectPath:
         #   - test-project
         dockerImage:
-          - editor-ubuntu-2021.3.23f1-base-1.1.2
+          - 2021.3.23f1
     steps:
       - uses: actions/checkout@v3.5.2
         with:
